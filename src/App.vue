@@ -51,6 +51,86 @@ const colorData = [
         wrongColor: 'bg-slate-600',
         rightColor: 'bg-gray-600'
     },
+    {
+        wrongColor: 'bg-amber-400',
+        rightColor: 'bg-yellow-400'
+    },
+    {
+        wrongColor: 'bg-indigo-700',
+        rightColor: 'bg-blue-800'
+    },
+    {
+        wrongColor: 'bg-teal-800',
+        rightColor: 'bg-teal-900'
+    },
+    {
+        wrongColor: 'bg-slate-600',
+        rightColor: 'bg-gray-600'
+    },
+    {
+        wrongColor: 'bg-amber-400',
+        rightColor: 'bg-yellow-400'
+    },
+    {
+        wrongColor: 'bg-emerald-200',
+        rightColor: 'bg-green-200'
+    },
+    {
+        wrongColor: 'bg-indigo-700',
+        rightColor: 'bg-blue-800'
+    },
+    {
+        wrongColor: 'bg-teal-800',
+        rightColor: 'bg-teal-900'
+    },
+    {
+        wrongColor: 'bg-slate-600',
+        rightColor: 'bg-gray-600'
+    },
+    {
+        wrongColor: 'bg-amber-400',
+        rightColor: 'bg-yellow-400'
+    },
+    {
+        wrongColor: 'bg-emerald-200',
+        rightColor: 'bg-green-200'
+    },
+    {
+        wrongColor: 'bg-indigo-700',
+        rightColor: 'bg-blue-800'
+    },
+    {
+        wrongColor: 'bg-teal-800',
+        rightColor: 'bg-teal-900'
+    },
+    {
+        wrongColor: 'bg-slate-600',
+        rightColor: 'bg-gray-600'
+    },
+    {
+        wrongColor: 'bg-amber-400',
+        rightColor: 'bg-yellow-400'
+    },
+    {
+        wrongColor: 'bg-emerald-200',
+        rightColor: 'bg-green-200'
+    },
+    {
+        wrongColor: 'bg-indigo-700',
+        rightColor: 'bg-blue-800'
+    },
+    {
+        wrongColor: 'bg-teal-800',
+        rightColor: 'bg-teal-900'
+    },
+    {
+        wrongColor: 'bg-slate-600',
+        rightColor: 'bg-gray-600'
+    },
+    {
+        wrongColor: 'bg-amber-400',
+        rightColor: 'bg-yellow-400'
+    }
 ]
 
 let score = ref(0);
@@ -156,31 +236,10 @@ const getUsername = () => {
     }
     return username.value;
 }
-
-colorSelected = getRandomColor()
 </script>
  
 <template>
     <div class="w-screen h-screen">
-        <!-- <div class="w-full flex flex-col items-center">
-            <p class="text-center text-lg font-bold mt-5">Score: {{ score }}</p>
-            <div class="flex flex-row mb-5 mt-10 gap-10 items-center">
-                <button class="btn" @click="startGame">start game</button>
-                <p class="font-mono text-6xl">{{ countdown }}</p>
-                <button class="btn" @click="resetGame">reset game</button>
-            </div>
-
-            <div class="w-full flex flex-col text-center" v-show="gameEnd">
-                <p class="text-2xl font-bold">Congrats, the game is over!</p>
-                <p class="text-2xl font-bold">your score is {{ score }}</p>
-            </div>
-
-            <div class="grid gap-3 text-center" :class="nextLevel()" v-show="start">
-                <div v-for="(color, index) in colorSelected" :key="index">
-                    <div class="w-28 h-28 rounded-full" :class="color" @click="checkAnswer(color)"></div>
-                </div>
-            </div>
-        </div> -->
         <div class="w-full h-full flex">
             <div class="flex flex-row m-auto w-9/12 h-5/6 bg-gray-700 shadow-md rounded-2xl">
                 <div class="form-control w-full max-w-xs m-auto" v-if="!input">
