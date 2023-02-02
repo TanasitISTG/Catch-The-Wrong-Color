@@ -143,10 +143,10 @@ const randomColor = () => {
     let color = colorData[Math.floor(Math.random() * colorData.length)];
     for (let i = 0; i < columNumer; i++) {
         if (colorSelected.length < columNumer - 1) {
-            colorSelected.push(color.rightColor);
+            colorSelected.push(color.wrongColor);
         }
         else {
-            colorSelected.push(color.wrongColor);
+            colorSelected.push(color.rightColor);
             break;
         }
     }
@@ -171,9 +171,9 @@ const nextLevel = () => {
     }
 }
 
-const checkAnswer = (ans) => {
+const checkAnswer = (color) => {
     for (let i = 0; i < colorData.length; i++) {
-        if (ans == colorData[i].wrongColor) {
+        if (color === colorData[i].rightColor) {
             score.value++;
             colorSelected = getRandomColor();
             break;
