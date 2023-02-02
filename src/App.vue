@@ -1,6 +1,89 @@
 <script setup>
 import { ref } from 'vue';
-import colorData from './assets/color.json'
+// import colorData from './assets/color.json'
+
+const colorData = [
+    {
+        "wrongColor": "bg-red-800",
+        "rightColor": "bg-red-700"
+    },
+    {
+        "wrongColor": "bg-blue-700",
+        "rightColor": "bg-blue-600"
+    },
+    {
+        "wrongColor": "bg-green-500",
+        "rightColor": "bg-green-400"
+    },
+    {
+        "wrongColor": "bg-yellow-500",
+        "rightColor": "bg-yellow-400"
+    },
+    {
+        "wrongColor": "bg-purple-600",
+        "rightColor": "bg-purple-500"
+    },
+    {
+        "wrongColor": "bg-pink-900",
+        "rightColor": "bg-rose-900"
+    },
+    {
+        "wrongColor": "bg-indigo-800",
+        "rightColor": "bg-indigo-700"
+    },
+    {
+        "wrongColor": "bg-neutral-900",
+        "rightColor": "bg-neutral-800"
+    },
+    {
+        "wrongColor": "bg-amber-400",
+        "rightColor": "bg-yellow-400"
+    },
+    {
+        "wrongColor": "bg-emerald-200",
+        "rightColor": "bg-green-200"
+    },
+    {
+        "wrongColor": "bg-indigo-700",
+        "rightColor": "bg-blue-800"
+    },
+    {
+        "wrongColor": "bg-teal-900",
+        "rightColor": "bg-teal-800"
+    },
+    {
+        "wrongColor": "bg-slate-600",
+        "rightColor": "bg-gray-600"
+    },
+    {
+        "wrongColor": "bg-rose-900",
+        "rightColor": "bg-pink-900"
+    },
+    {
+        "wrongColor": "bg-blue-800",
+        "rightColor": "bg-indigo-700"
+    },
+    {
+        "wrongColor": "bg-green-200",
+        "rightColor": "bg-emerald-200"
+    },
+    {
+        "wrongColor": "bg-gray-600",
+        "rightColor": "bg-slate-600"
+    },
+    {
+        "wrongColor": "bg-teal-800",
+        "rightColor": "bg-teal-900"
+    },
+    {
+        "wrongColor": "bg-yellow-400",
+        "rightColor": "bg-amber-400"
+    },
+    {
+        "wrongColor": "bg-neutral-900",
+        "rightColor": "bg-neutral-800"
+    }
+]
 
 let score = ref(0);
 let start = ref(false);
