@@ -4,85 +4,53 @@ import { ref } from 'vue';
 
 const colorData = [
     {
-        "wrongColor": "bg-red-800",
-        "rightColor": "bg-red-700"
+        wrongColor: 'bg-red-700',
+        rightColor: 'bg-red-800'
     },
     {
-        "wrongColor": "bg-blue-700",
-        "rightColor": "bg-blue-600"
+        wrongColor: 'bg-blue-600',
+        rightColor: 'bg-blue-700'
     },
     {
-        "wrongColor": "bg-green-500",
-        "rightColor": "bg-green-400"
+        wrongColor: 'bg-green-400',
+        rightColor: 'bg-green-500'
     },
     {
-        "wrongColor": "bg-yellow-500",
-        "rightColor": "bg-yellow-400"
+        wrongColor: 'bg-yellow-400',
+        rightColor: 'bg-yellow-500'
     },
     {
-        "wrongColor": "bg-purple-600",
-        "rightColor": "bg-purple-500"
+        wrongColor: 'bg-purple-600',
+        rightColor: 'bg-purple-500'
     },
     {
-        "wrongColor": "bg-pink-900",
-        "rightColor": "bg-rose-900"
+        wrongColor: 'bg-pink-900',
+        rightColor: 'bg-rose-900'
     },
     {
-        "wrongColor": "bg-indigo-800",
-        "rightColor": "bg-indigo-700"
+        wrongColor: 'bg-indigo-800',
+        rightColor: 'bg-indigo-700'
     },
     {
-        "wrongColor": "bg-neutral-900",
-        "rightColor": "bg-neutral-800"
+        wrongColor: 'bg-neutral-900',
+        rightColor: 'bg-neutral-800'
     },
     {
-        "wrongColor": "bg-amber-400",
-        "rightColor": "bg-yellow-400"
+        wrongColor: 'bg-emerald-200',
+        rightColor: 'bg-green-200'
     },
     {
-        "wrongColor": "bg-emerald-200",
-        "rightColor": "bg-green-200"
+        wrongColor: 'bg-blue-700',
+        rightColor: 'bg-blue-800'
     },
     {
-        "wrongColor": "bg-indigo-700",
-        "rightColor": "bg-blue-800"
+        wrongColor: 'bg-teal-800',
+        rightColor: 'bg-teal-900'
     },
     {
-        "wrongColor": "bg-teal-900",
-        "rightColor": "bg-teal-800"
+        wrongColor: 'bg-slate-600',
+        rightColor: 'bg-gray-600'
     },
-    {
-        "wrongColor": "bg-slate-600",
-        "rightColor": "bg-gray-600"
-    },
-    {
-        "wrongColor": "bg-rose-900",
-        "rightColor": "bg-pink-900"
-    },
-    {
-        "wrongColor": "bg-blue-800",
-        "rightColor": "bg-indigo-700"
-    },
-    {
-        "wrongColor": "bg-green-200",
-        "rightColor": "bg-emerald-200"
-    },
-    {
-        "wrongColor": "bg-gray-600",
-        "rightColor": "bg-slate-600"
-    },
-    {
-        "wrongColor": "bg-teal-800",
-        "rightColor": "bg-teal-900"
-    },
-    {
-        "wrongColor": "bg-yellow-400",
-        "rightColor": "bg-amber-400"
-    },
-    {
-        "wrongColor": "bg-neutral-900",
-        "rightColor": "bg-neutral-800"
-    }
 ]
 
 let score = ref(0);
@@ -172,12 +140,13 @@ const nextLevel = () => {
 }
 
 const checkAnswer = (color) => {
-    for (let i = 0; i < colorData.length; i++) {
-        if (color === colorData[i].rightColor) {
-            score.value++;
-            colorSelected = getRandomColor();
-            break;
-        }
+    let oddColor = colorSelected.filter((color) => {
+        return colorSelected.indexOf(color) === colorSelected.lastIndexOf(color);
+    })
+
+    if (color === oddColor[0]) {
+        score.value++;
+        colorSelected = getRandomColor();
     }
 }
 
