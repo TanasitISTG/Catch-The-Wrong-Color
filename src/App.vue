@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-// import colorData from './assets/color.json'
 
 const colorData = [
     {
@@ -239,26 +238,26 @@ const getUsername = () => {
 </script>
  
 <template>
-    <div class="w-screen h-screen">
+    <div class="w-screen h-screen dark">
         <div class="w-full h-full flex">
-            <div class="flex flex-row m-auto w-9/12 h-5/6 bg-gray-700 shadow-md rounded-2xl">
+            <div class="flex flex-row m-auto w-9/12 h-5/6 bg-slate-200 dark:bg-slate-700 shadow-md rounded-2xl">
                 <div class="form-control w-full max-w-xs m-auto" v-if="!input">
                     <label class="label">
-                        <span class="label-text font-semibold">What is your name?</span>
+                        <span class="label-text font-bold">What is your name?</span>
                     </label>
 
-                    <input type="text" placeholder="Enter your name" class="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Enter your name" class="input input-bordered"
                         v-model.trim="username" />
-                    <button class="btn btn-primary mt-3" @click="startGame()">Start Game</button>
+                    <button class="btn mt-3" @click="startGame()">Start Game</button>
                 </div>
 
                 <div class="w-full flex flex-col items-center" v-if="input">
-                    <div class="flex flex-row mb-5 mt-10 gap-10 items-center">
-                        <p class="text-right text-lg font-bold m-auto">Username: {{ getUsername() }}</p>
-                        <p class="text-left text-lg font-bold m-auto">Score: {{ score }}</p>
+                    <div class="flex flex-row mb-5 mt-10 gap-10">
+                        <p class="text-lg font-bold m-auto">Username: {{ getUsername() }}</p>
+                        <p class="text-lg font-bold m-auto">Score: {{ score }}</p>
                     </div>
 
-                    <div class="flex flex-row mb-10 mt-10 gap-10 items-center">
+                    <div class="flex mb-10 mt-10 gap-10">
                         <button class="btn" @click="startGame()">start new game</button>
                         <p class="font-mono text-6xl">{{ countdown }}</p>
                         <button class="btn" @click="resetGame()">reset game</button>
@@ -269,7 +268,7 @@ const getUsername = () => {
                         <p class="text-2xl font-bold">your score is {{ score }}</p>
                     </div>
 
-                    <div class="grid gap-3 text-center" :class="nextLevel()" v-show="start">
+                    <div class="grid gap-3" :class="nextLevel()" v-show="start">
                         <div v-for="(color, index) in colorSelected" :key="index">
                             <div class="w-24 h-24 rounded-full" :class="color" @click="checkAnswer(color)"></div>
                         </div>
