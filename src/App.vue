@@ -259,7 +259,7 @@ const getUsername = () => {
                     </div>
 
                     <div class="flex flex-row mb-10 mt-10 gap-10 items-center">
-                        <button class="btn" @click="startGame()">start game</button>
+                        <button class="btn" @click="startGame()">start new game</button>
                         <p class="font-mono text-6xl">{{ countdown }}</p>
                         <button class="btn" @click="resetGame()">reset game</button>
                     </div>
