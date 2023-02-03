@@ -269,8 +269,8 @@ const getUsername = () => {
                     </div>
 
                     <div class="grid gap-3" :class="nextLevel()" v-show="start">
-                        <div v-for="(color, index) in colorSelected" :key="index">
-                            <div class="w-24 h-24 rounded-full" :class="color" @click="checkAnswer(color)"></div>
+                        <div v-for="(color, index) in colorSelected" :key="index" class="w-24 h-24 rounded-full"
+                            :class="color" @click="checkAnswer(color)">
                         </div>
                     </div>
                 </div>
