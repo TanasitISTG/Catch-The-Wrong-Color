@@ -201,10 +201,7 @@ const randomColor = () => {
 }
 
 const nextLevel = () => {
-    if (score.value == 0) {
-        return 'grid-cols-2';
-    }
-    else if (score.value >= 5 && score.value <= 14) {
+    if (score.value >= 5 && score.value <= 14) {
         return 'grid-cols-3';
     }
     else if (score.value >= 15 && score.value <= 24) {
@@ -240,7 +237,7 @@ const getUsername = () => {
 <template>
     <div class="w-screen h-screen dark">
         <div class="w-full h-full flex">
-            <div class="w-9/12 h-5/6 flex flex-row m-auto bg-slate-200 dark:bg-slate-700 shadow-md rounded-2xl">
+            <div class="w-9/12 h-5/6 flex m-auto bg-slate-200 dark:bg-slate-700 shadow-md rounded-2xl">
                 <div class="form-control w-full max-w-xs m-auto" v-if="!input">
                     <label class="label">
                         <span class="label-text font-bold">What is your name?</span>
