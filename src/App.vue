@@ -176,20 +176,20 @@ const getRandomColor = () => {
 }
 
 const randomColor = () => {
-    let columNumer = 4;
+    let columnNumer = 4;
     if (score.value >= 5 && score.value <= 14) {
-        columNumer = 9;
+        columnNumer = 9;
     }
     else if (score.value >= 15 && score.value <= 24) {
-        columNumer = 16;
+        columnNumer = 16;
     }
     else if (score.value >= 25) {
-        columNumer = 25;
+        columnNumer = 25;
     }
 
     let color = colorData[Math.floor(Math.random() * colorData.length)];
-    for (let i = 0; i < columNumer; i++) {
-        if (colorSelected.length < columNumer - 1) {
+    for (let i = 0; i < columnNumer; i++) {
+        if (colorSelected.length < columnNumer - 1) {
             colorSelected.push(color.wrongColor);
         }
         else {
