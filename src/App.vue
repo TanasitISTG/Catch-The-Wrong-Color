@@ -240,7 +240,7 @@ const getUsername = () => {
 <template>
     <div class="w-screen h-screen dark">
         <div class="w-full h-full flex">
-            <div class="flex flex-row m-auto w-9/12 h-5/6 bg-slate-200 dark:bg-slate-700 shadow-md rounded-2xl">
+            <div class="w-9/12 h-5/6 flex flex-row m-auto bg-slate-200 dark:bg-slate-700 shadow-md rounded-2xl">
                 <div class="form-control w-full max-w-xs m-auto" v-if="!input">
                     <label class="label">
                         <span class="label-text font-bold">What is your name?</span>
