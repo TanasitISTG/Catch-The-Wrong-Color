@@ -142,7 +142,8 @@ let colorSelected = [];
 let timer;
 
 const startGame = () => {
-    if (start.value) return;
+    if (timer) clearInterval(timer);
+
     start.value = true;
     input.value = true;
     gameEnd.value = false;
@@ -158,13 +159,6 @@ const startGame = () => {
         }
         countdown.value--;
     }, 1000)
-}
-const resetGame = () => {
-    start.value = false;
-    gameEnd.value = false;
-    countdown.value = 60;
-    score.value = 0;
-    clearInterval(timer);
 }
 
 const getRandomColor = () => {
@@ -255,9 +249,8 @@ const getUsername = () => {
                     </div>
 
                     <div class="flex mb-10 mt-10 gap-10">
-                        <button class="btn" @click="startGame()">start new game</button>
-                        <p class="font-mono text-6xl">{{ countdown }}</p>
-                        <button class="btn" @click="resetGame()">reset game</button>
+                        <p class="font-mono text-5xl text-center">{{ countdown }}</p>
+                        <button class="btn" @click="startGame()">restart game</button>
                     </div>
 
                     <div class="flex flex-col text-center mt-32" v-show="gameEnd">
