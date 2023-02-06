@@ -105,6 +105,7 @@ const checkAnswer = (color) => {
 
 const setMainMenu = () => {
     mainMenu.value = !mainMenu.value;
+    isGameEnd.value = false;
     clearInterval(timer);
 }
 
@@ -129,6 +130,15 @@ const saveScore = async () => {
     leaderboard.value = data;
 }
 
+const convertDate = (date) => {
+    const newDate = new Date(date);
+    return newDate.toLocaleDateString() + ' ' + newDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+const numberWithCommas = (number) => {
+    return number.toLocaleString('en-US');
+}
+
 getLeaderboard();
 </script>
  
@@ -139,13 +149,13 @@ getLeaderboard();
                 <img src="./assets/images/logo.png" alt="Catch The Wrong Color">
             </div>
 
-            <div class="w-1/3 h-2/6 mx-auto mt-6 rounded-3xl shadow-lg" style="background-color: #334155;">
+            <div class="w-1/3 h-auto mx-auto mt-6 rounded-3xl shadow-lg pb-16" style="background-color: #334155;">
                 <div class="flex flex-col items-center">
                     <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14" v-model.trim="name" />
                     <button class="btn w-5/12 h-1/6 mt-2" style="background-color: #111B2E;" @click="startGame()">Let's
                         Start!</button>
                     <hr class="w-7/12 mt-9" style="border-color: gray;">
-                    <label for="how-to-play" class="btn w-5/12 mt-8" style="background-color: #111B2E;">How to
+                    <label for="how-to-play" class="btn w-5/12 mt-10" style="background-color: #111B2E;">How to
                         play</label>
                 </div>
             </div>
@@ -154,7 +164,7 @@ getLeaderboard();
         <div class="w-full h-full" v-show="!mainMenu">
             <div class="w-full h-1/6">
                 <div class="w-1/12 mt-6 ml-6">
-                    <img src="./assets/images/logo.png" alt="Catch The Wrong Color">
+                    <img src="./assets/images/logo.png" alt="Catch The Wrong Color" @click="setMainMenu()">
                 </div>
             </div>
 
@@ -175,7 +185,8 @@ getLeaderboard();
                         <div class="w-2/4 h-full" v-show="!isGameEnd">
                             <div class="w-3/6 h-full rounded-3xl shadow-lg m-auto" style="background-color: #334155;">
                                 <div class="w-full h-full flex flex-col">
-                                    <p class="text-center text-5xl font-mono mt-7">{{ counter }}</p>
+                                    <p class="text-center text-5xl font-mono mt-7" style="color: white;">{{ counter }}
+                                    </p>
 
                                     <div class="grid gap-1 m-auto mt-10" :class="getNumberOfgridColumns()">
                                         <div class="rounded-full" v-for="(color, index) in selectedColor" :key="index"
@@ -208,6 +219,17 @@ getLeaderboard();
                 </div>
             </div>
         </div>
+
+        <div id="firework" class="w-full h-full" v-show="isGameEnd">
+            <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 left-0">
+            <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 right-0">
+            <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 left-0">
+            <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 right-0">
+            <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 left-1/4">
+            <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 right-1/4">
+            <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 left-1/4">
+            <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 right-1/4">
+        </div>
     </div>
 
 
@@ -238,21 +260,34 @@ getLeaderboard();
     <!-- modal leaderboard -->
     <input type="checkbox" id="leaderboard" class="modal-toggle" />
     <div class="modal">
-        <div class="modal-box relative">
+        <div class="modal-box relative w-12/12">
             <label for="leaderboard" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
             <h3 class="text-lg font-bold">Leaderboard</h3>
-            <!-- <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p> -->
-            <!-- loop through leaderboard and display name and score -->
             <div class="flex flex-col">
-                <div class="flex flex-row justify-between">
-                    <p class="font-bold">Name</p>
-                    <p class="font-bold">Score</p>
+                <div class="flex flex-row">
+                    <div class="w-1/3">
+                        <p class="font-bold text-left">Name</p>
+                    </div>
+                    <div class="w-1/3">
+                        <p class="font-bold text-center">Score</p>
+                    </div>
+                    <div class="w-1/3">
+                        <p class="font-bold text-right">Date</p>
+                    </div>
                 </div>
-                <div class="flex flex-row justify-between" v-for="(player, index) in leaderboard" :key="index">
-                    <p>{{ player.name }}</p>
-                    <p>{{ player.score }}</p>
+                <div class="flex flex-row" v-for="(player, index) in leaderboard" :key="index">
+                    <div class="w-1/3">
+                        <p class="font-bold text-left">{{ player.name }}</p>
+                    </div>
+                    <div class="w-1/3">
+                        <p class="font-bold text-center">{{ numberWithCommas(player.score) }}</p>
+                    </div>
+                    <div class="w-1/3">
+                        <p class="font-bold text-right">{{ convertDate(player.updated_at) }}</p>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
@@ -270,5 +305,9 @@ input::placeholder {
 
 input:focus::-webkit-input-placeholder {
     color: transparent;
+}
+
+#firework {
+    pointer-events: none; 
 }
 </style>
