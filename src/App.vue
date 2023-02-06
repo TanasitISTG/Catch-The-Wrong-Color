@@ -148,7 +148,7 @@ getLeaderboard();
             <div class="w-1/3 h-auto mx-auto mt-6 rounded-3xl shadow-lg pb-16" style="background-color: #334155;">
                 <div class="flex flex-col items-center">
                     <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14" v-model.trim="name" />
-                    <button class="btn w-5/12 h-1/6 mt-2" style="background-color: #111B2E;" @click="startGame()">Let's
+                    <button class="btn w-5/12 h-1/6 mt-4" style="background-color: #111B2E;" @click="startGame()">Let's
                         Start!</button>
                     <hr class="w-7/12 mt-9" style="border-color: gray;">
                     <label for="how-to-play" class="btn w-5/12 mt-10" style="background-color: #111B2E;">How to
@@ -179,7 +179,8 @@ getLeaderboard();
                         </div>
 
                         <div class="w-2/4 h-full" v-show="!isGameEnd">
-                            <div class="w-3/6 h-auto rounded-3xl shadow-lg m-auto pb-12" style="background-color: #334155;">
+                            <div class="w-3/6 h-auto rounded-3xl shadow-lg m-auto pb-12"
+                                style="background-color: #334155;">
                                 <div class="w-full h-full flex flex-col">
                                     <p class="text-center text-5xl font-mono mt-7" style="color: white;">{{ counter }}
                                     </p>
@@ -231,12 +232,23 @@ getLeaderboard();
 
 
     <!-- modal how to play -->
-    <input type="checkbox" id="how-to-play" class="modal-toggle" />
+    <!-- <input type="checkbox" id="how-to-play" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box relative">
             <label for="how-to-play" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
             <h3 class="text-lg font-bold">How to play?</h3>
             <p class="py-4">Find the different color, once you find it, click on it.</p>
+        </div>
+    </div> -->
+
+    <input type="checkbox" id="how-to-play" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">How to play?</h3>
+            <p class="py-4">Find the different color, once you find it, click on it.</p>
+            <div class="modal-action mt-0">
+                <label for="how-to-play" class="btn">Yay!</label>
+            </div>
         </div>
     </div>
 
