@@ -135,10 +135,6 @@ const convertDate = (date) => {
     return newDate.toLocaleDateString() + ' ' + newDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-const numberWithCommas = (number) => {
-    return number.toLocaleString('en-US');
-}
-
 getLeaderboard();
 </script>
  
@@ -280,14 +276,13 @@ getLeaderboard();
                         <p class="font-bold text-left">{{ player.name }}</p>
                     </div>
                     <div class="w-1/3">
-                        <p class="font-bold text-center">{{ numberWithCommas(player.score) }}</p>
+                        <p class="font-bold text-center">{{ player.score }}</p>
                     </div>
                     <div class="w-1/3">
                         <p class="font-bold text-right">{{ convertDate(player.updated_at) }}</p>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -308,6 +303,6 @@ input:focus::-webkit-input-placeholder {
 }
 
 #firework {
-    pointer-events: none; 
+    pointer-events: none;
 }
 </style>
