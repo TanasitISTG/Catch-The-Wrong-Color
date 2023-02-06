@@ -105,6 +105,7 @@ const checkAnswer = (color) => {
 
 const setMainMenu = () => {
     mainMenu.value = !mainMenu.value;
+    clearInterval(timer);
 }
 
 async function getLeaderboard() {
