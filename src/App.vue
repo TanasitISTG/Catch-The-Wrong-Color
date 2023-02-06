@@ -27,7 +27,7 @@ const startGame = () => {
     isGameEnd.value = false;
     mainMenu.value = false;
     score.value = 0;
-    counter.value = 5;
+    counter.value = 60;
     getRandomColors();
 
     timer = setInterval(() => {
