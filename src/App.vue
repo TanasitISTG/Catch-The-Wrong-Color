@@ -270,7 +270,7 @@ getLeaderboard();
     <div class="modal">
         <div class="modal-box relative w-12/12">
             <label for="leaderboard" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-            <h3 class="text-lg font-bold">Leaderboard</h3>
+            <h3 class="text-lg font-bold mb-3">Top 10 players</h3>
             <div class="flex flex-col">
                 <div class="flex flex-row">
                     <div class="w-1/3">
@@ -285,13 +285,13 @@ getLeaderboard();
                 </div>
                 <div class="flex flex-row" v-for="(player, index) in leaderboard" :key="index">
                     <div class="w-1/3">
-                        <p class="font-bold text-left">{{ player.name }}</p>
+                        <p class="text-left">{{ player.name }}</p>
                     </div>
                     <div class="w-1/3">
-                        <p class="font-bold text-center">{{ player.score }}</p>
+                        <p class="text-center">{{ player.score }}</p>
                     </div>
                     <div class="w-1/3">
-                        <p class="font-bold text-right">{{ convertDate(player.updated_at) }}</p>
+                        <p class="text-right">{{ convertDate(player.updated_at) }}</p>
                     </div>
                 </div>
             </div>
