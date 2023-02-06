@@ -179,7 +179,7 @@ getLeaderboard();
                         </div>
 
                         <div class="w-2/4 h-full" v-show="!isGameEnd">
-                            <div class="w-3/6 h-full rounded-3xl shadow-lg m-auto" style="background-color: #334155;">
+                            <div class="w-3/6 h-auto rounded-3xl shadow-lg m-auto pb-12" style="background-color: #334155;">
                                 <div class="w-full h-full flex flex-col">
                                     <p class="text-center text-5xl font-mono mt-7" style="color: white;">{{ counter }}
                                     </p>
