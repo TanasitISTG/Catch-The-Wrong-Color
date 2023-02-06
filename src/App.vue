@@ -4,9 +4,10 @@ import colorJson from './assets/data/colors.json';
 
 const colors = ref(colorJson);
 const name = ref('');
-const mainMenu = ref(false);
+const mainMenu = ref(true);
 const score = ref(0);
 const counter = ref(60);
+const isGameEnd = ref(false);
 let selectedColor = [];
 let timer;
 
@@ -23,15 +24,17 @@ const startGame = () => {
         clearInterval(timer);
     }
 
-    mainMenu.value = true;
+    isGameEnd.value = false;
+    mainMenu.value = false;
     score.value = 0;
-    counter.value = 60;
+    counter.value = 5;
     getRandomColors();
 
     timer = setInterval(() => {
         if (counter.value === 0) {
             clearInterval(timer);
-            mainMenu.value = false;
+            isGameEnd.value = true;
+            return;
         }
         counter.value--;
     }, 1000);
@@ -105,7 +108,7 @@ const setMainMenu = () => {
  
 <template>
     <div class="w-screen h-screen" style="background-color: #2A303C;">
-        <div class="w-full h-full" v-show="!mainMenu">
+        <div class="w-full h-full" v-show="mainMenu">
             <div class="w-5/12 mx-auto mt-6">
                 <img src="./assets/images/logo.png" alt="Catch The Wrong Color">
             </div>
@@ -122,7 +125,7 @@ const setMainMenu = () => {
             </div>
         </div>
 
-        <div class="w-full h-full" v-show="mainMenu">
+        <div class="w-full h-full" v-show="!mainMenu">
             <div class="w-full h-1/6">
                 <div class="w-1/12 mt-6 ml-6">
                     <img src="./assets/images/logo.png" alt="Catch The Wrong Color">
@@ -132,7 +135,7 @@ const setMainMenu = () => {
             <div class="w-full h-full">
                 <div class="w-full h-full flex flex-col">
                     <div class="w-full h-full flex flex-row">
-                        <div class="w-1/4 h-1/3 flex flex-col">
+                        <div class="w-1/4 h-1/3 flex flex-col" v-show="!isGameEnd">
                             <p class="text-lg ml-80">
                                 <span class="font-bold">Player: </span>
                                 {{ getName() }}
@@ -143,23 +146,33 @@ const setMainMenu = () => {
                             </p>
                         </div>
 
-                        <div class="w-2/4 h-full">
-                            <div class="w-3/6 h-full rounded-3xl shadow-lg mx-auto" style="background-color: #334155;">
+                        <div class="w-2/4 h-full" v-show="!isGameEnd">
+                            <div class="w-3/6 h-full rounded-3xl shadow-lg m-auto" style="background-color: #334155;">
                                 <div class="w-full h-full flex flex-col">
                                     <p class="text-center text-5xl font-mono mt-7">{{ counter }}</p>
 
                                     <div class="grid gap-1 m-auto mt-10" :class="getNumberOfgridColumns()">
-                                        <div class="rounded-full" v-for="(color, index) in selectedColor"
-                                            :key="index" :class="`${color} ${getSizeOfCircles()}`"
-                                            @click="checkAnswer(color)"></div>
+                                        <div class="rounded-full" v-for="(color, index) in selectedColor" :key="index"
+                                            :class="`${color} ${getSizeOfCircles()}`" @click="checkAnswer(color)"></div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full h-full" v-show="isGameEnd">
+                            <div class="w-1/4 h-full rounded-3xl shadow-lg mx-auto" style="background-color: #334155;">
+                                <div class="w-full h-full flex flex-col" v-show="isGameEnd">
+                                    <p class="text-center text-5xl font-mono mt-32" style="color: #FFDA1B;">Congratulations!</p>
+                                    <p class="text-center text-5xl font-mono mt-7">{{ getName() }}</p>
+                                    <p class="text-center text-5xl font-mono mt-7">{{ score }} point!!</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="w-full h-full flex flex-row justify-center gap-5">
-                        <button class="btn mt-6" style="background-color: #AC9C48; color: white;" @click="setMainMenu()">Main
+                        <button class="btn mt-6" style="background-color: #AC9C48; color: white;"
+                            @click="setMainMenu()">Main
                             menu</button>
                         <label for="restart-game" class="btn mt-6"
                             style="background-color: #AC9C48; color: white;">Restart Game</label>
@@ -185,9 +198,8 @@ const setMainMenu = () => {
     <input type="checkbox" id="restart-game" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box">
-            <h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
-            <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!
-            </p>
+            <h3 class="font-bold text-lg">Are you sure you want to restart the game</h3>
+            <p class="py-4">Your score will be reset.</p>
             <div class="modal-action">
                 <label for="restart-game" class="btn">No thanks</label>
                 <label for="restart-game" class="btn btn-error" @click="startGame()">Yay!</label>
