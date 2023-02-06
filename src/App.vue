@@ -8,6 +8,7 @@ const mainMenu = ref(true);
 const score = ref(0);
 const counter = ref(60);
 const isGameEnd = ref(false);
+const leaderboard = ref([]);
 let selectedColor = [];
 let timer;
 
@@ -34,6 +35,7 @@ const startGame = () => {
         if (counter.value === 0) {
             clearInterval(timer);
             isGameEnd.value = true;
+            saveScore();
             return;
         }
         counter.value--;
@@ -104,6 +106,29 @@ const checkAnswer = (color) => {
 const setMainMenu = () => {
     mainMenu.value = !mainMenu.value;
 }
+
+async function getLeaderboard() {
+    const response = await fetch('https://test-project-api-production.up.railway.app/leaderboard');
+    const data = await response.json();
+    leaderboard.value = data;
+}
+
+const saveScore = async () => {
+    const response = await fetch('https://test-project-api-production.up.railway.app/leaderboard', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: getName(),
+            score: score.value
+        })
+    });
+    const data = await response.json();
+    leaderboard.value = data;
+}
+
+getLeaderboard();
 </script>
  
 <template>
@@ -162,7 +187,8 @@ const setMainMenu = () => {
                         <div class="w-full h-full" v-show="isGameEnd">
                             <div class="w-1/4 h-full rounded-3xl shadow-lg mx-auto" style="background-color: #334155;">
                                 <div class="w-full h-full flex flex-col" v-show="isGameEnd">
-                                    <p class="text-center text-5xl font-mono mt-32" style="color: #FFDA1B;">Congratulations!</p>
+                                    <p class="text-center text-5xl font-mono mt-32" style="color: #FFDA1B;">
+                                        Congratulations!</p>
                                     <p class="text-center text-5xl font-mono mt-7">{{ getName() }}</p>
                                     <p class="text-center text-5xl font-mono mt-7">{{ score }} point!!</p>
                                 </div>
@@ -176,6 +202,9 @@ const setMainMenu = () => {
                             menu</button>
                         <label for="restart-game" class="btn mt-6"
                             style="background-color: #AC9C48; color: white;">Restart Game</label>
+
+                        <label for="leaderboard" class="btn mt-6"
+                            style="background-color: #AC9C48; color: white;">LeaderBoard</label>
                     </div>
                 </div>
             </div>
@@ -203,6 +232,27 @@ const setMainMenu = () => {
             <div class="modal-action">
                 <label for="restart-game" class="btn">No thanks</label>
                 <label for="restart-game" class="btn btn-error" @click="startGame()">Yay!</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal leaderboard -->
+    <input type="checkbox" id="leaderboard" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box relative">
+            <label for="leaderboard" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <h3 class="text-lg font-bold">Leaderboard</h3>
+            <!-- <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p> -->
+            <!-- loop through leaderboard and display name and score -->
+            <div class="flex flex-col">
+                <div class="flex flex-row justify-between">
+                    <p class="font-bold">Name</p>
+                    <p class="font-bold">Score</p>
+                </div>
+                <div class="flex flex-row justify-between" v-for="(player, index) in leaderboard" :key="index">
+                    <p>{{ player.name }}</p>
+                    <p>{{ player.score }}</p>
+                </div>
             </div>
         </div>
     </div>
