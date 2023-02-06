@@ -198,13 +198,11 @@ getLeaderboard();
 
                     <div class="w-full h-full flex flex-row justify-center gap-5">
                         <button class="btn mt-6" style="background-color: #AC9C48; color: white;"
-                            @click="setMainMenu()">Main
-                            menu</button>
+                            @click="setMainMenu()">Mainmenu</button>
+                        <label for="leaderboard" class="btn mt-6" style="background-color: #AC9C48; color: white;"
+                            @click="getLeaderboard()">LeaderBoard</label>
                         <label for="restart-game" class="btn mt-6"
                             style="background-color: #AC9C48; color: white;">Restart Game</label>
-
-                        <label for="leaderboard" class="btn mt-6"
-                            style="background-color: #AC9C48; color: white;">LeaderBoard</label>
                     </div>
                 </div>
             </div>
