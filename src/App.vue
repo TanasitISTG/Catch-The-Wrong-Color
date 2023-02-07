@@ -1,17 +1,16 @@
 <script setup>
 import { ref } from 'vue';
-import colorJson from './assets/data/colors.json';
+import colorJSON from './assets/data/colors.json';
 
-const colors = ref(colorJson);
 const name = ref('');
 const mainMenu = ref(true);
 const score = ref(0);
 const counter = ref(60);
 const isGameEnd = ref(false);
 const leaderboard = ref([]);
-let selectedColor = [];
+let selectedColor = ref([]);
 let prevSelectedColor = {};
-let timer;
+let timerId;
 
 const getName = () => {
     if (name.value === '' || name.value.length === 0) {
@@ -22,8 +21,8 @@ const getName = () => {
 }
 
 const startGame = () => {
-    if (timer) {
-        clearInterval(timer);
+    if (timerId) {
+        clearInterval(timerId);
     }
 
     isGameEnd.value = false;
@@ -32,9 +31,9 @@ const startGame = () => {
     counter.value = 60;
     getSelectedColor();
 
-    timer = setInterval(() => {
+    timerId = setInterval(() => {
         if (counter.value === 0) {
-            clearInterval(timer);
+            clearInterval(timerId);
             isGameEnd.value = true;
             saveScore();
             return;
@@ -42,7 +41,6 @@ const startGame = () => {
         counter.value--;
     }, 1000);
 }
-
 
 const getNumberOfCircles = () => {
     let circleNumer = 4;
@@ -82,8 +80,8 @@ const getSizeOfCircles = () => {
 }
 
 const getRandomColor = () => {
-    const random = Math.floor(Math.random() * colors.value.length);
-    return colors.value[random];
+    const random = Math.floor(Math.random() * colorJSON.length);
+    return colorJSON[random];
 }
 
 const getSelectedColor = () => {
@@ -106,6 +104,7 @@ const getSelectedColor = () => {
             selectedColor.push(color.secondaryColor);
         }
     }
+
     return selectedColor.sort(() => Math.random() - 0.5);
 }
 
@@ -121,7 +120,7 @@ const checkAnswer = (color) => {
 const setMainMenu = () => {
     mainMenu.value = !mainMenu.value;
     isGameEnd.value = false;
-    clearInterval(timer);
+    clearInterval(timerId);
 }
 
 async function getLeaderboard() {
@@ -131,7 +130,7 @@ async function getLeaderboard() {
 }
 
 const saveScore = async () => {
-    const response = await fetch('https://test-project-api-production.up.railway.app/leaderboard', {
+    await fetch('https://test-project-api-production.up.railway.app/leaderboard', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -161,7 +160,7 @@ getLeaderboard();
             <div class="w-1/3 h-auto mx-auto mt-6 rounded-3xl shadow-lg pb-16" style="background-color: #334155;">
                 <div class="flex flex-col items-center">
                     <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14" v-model.trim="name" />
-                    <button class="btn w-5/12 h-1/6 mt-4" style="background-color: #111B2E;" @click="startGame()">Let's
+                    <button class="btn w-5/12 mt-4" style="background-color: #111B2E;" @click="startGame()">Let's
                         Start!</button>
                     <hr class="w-7/12 mt-9" style="border-color: gray;">
                     <label for="how-to-play" class="btn w-5/12 mt-10" style="background-color: #111B2E;">How to
@@ -208,11 +207,11 @@ getLeaderboard();
 
                         <div class="w-full h-full" v-show="isGameEnd">
                             <div class="w-1/4 h-full rounded-3xl shadow-lg mx-auto" style="background-color: #334155;">
-                                <div class="w-full h-full flex flex-col" v-show="isGameEnd">
-                                    <p class="text-center text-5xl font-mono mt-32" style="color: #FFDA1B;">
+                                <div class="w-full h-full flex flex-col">
+                                    <p class="text-center text-4xl font-mono mt-32" style="color: #FFDA1B;">
                                         Congratulations!</p>
-                                    <p class="text-center text-5xl font-mono mt-7">{{ getName() }}</p>
-                                    <p class="text-center text-5xl font-mono mt-7">{{ score }} point!!</p>
+                                    <p class="text-center text-3xl font-mono mt-7">{{ getName() }}</p>
+                                    <p class="text-center text-3xl font-mono mt-7">{{ score }} point!!</p>
                                 </div>
                             </div>
                         </div>
@@ -228,36 +227,25 @@ getLeaderboard();
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="firework" class="w-full h-full" v-show="isGameEnd">
-            <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 left-0">
-            <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 right-0">
-            <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 left-0">
-            <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 right-0">
-            <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 left-1/4">
-            <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 right-1/4">
-            <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 left-1/4">
-            <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 right-1/4">
+            <div id="firework" class="w-full h-full" v-show="isGameEnd">
+                <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 left-0">
+                <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 right-0">
+                <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 left-0">
+                <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 right-0">
+                <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 left-1/4">
+                <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 right-1/4">
+                <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 left-1/4">
+                <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 right-1/4">
+            </div>
         </div>
     </div>
 
-
-
     <!-- modal how to play -->
-    <!-- <input type="checkbox" id="how-to-play" class="modal-toggle" />
-    <div class="modal">
-        <div class="modal-box relative">
-            <label for="how-to-play" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-            <h3 class="text-lg font-bold">How to play?</h3>
-            <p class="py-4">Find the different color, once you find it, click on it.</p>
-        </div>
-    </div> -->
-
     <input type="checkbox" id="how-to-play" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box">
-            <h3 class="font-bold text-lg">How to play?</h3>
+            <h3 class="font-bold text-2xl">How to play?</h3>
             <p class="py-4">Find the different color, once you find it, click on it.</p>
             <div class="modal-action mt-0">
                 <label for="how-to-play" class="btn">Yay!</label>
@@ -269,7 +257,7 @@ getLeaderboard();
     <input type="checkbox" id="restart-game" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box">
-            <h3 class="font-bold text-lg">Are you sure you want to restart the game</h3>
+            <h3 class="font-bold text-2xl">Are you sure you want to restart the game</h3>
             <p class="py-4">Your score will be reset.</p>
             <div class="modal-action">
                 <label for="restart-game" class="btn">No thanks</label>
@@ -283,7 +271,7 @@ getLeaderboard();
     <div class="modal">
         <div class="modal-box relative w-12/12">
             <label for="leaderboard" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-            <h3 class="text-lg font-bold mb-3">Top 10 players</h3>
+            <h3 class="text-2xl font-bold mb-3">Top 10 players</h3>
             <div class="flex flex-col">
                 <div class="flex flex-row">
                     <div class="w-1/3">
@@ -320,11 +308,6 @@ input {
 
 input::placeholder {
     color: #000000;
-    text-align: center;
-}
-
-input:focus::-webkit-input-placeholder {
-    color: transparent;
 }
 
 #firework {
