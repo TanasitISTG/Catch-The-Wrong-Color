@@ -159,9 +159,9 @@ getLeaderboard();
 
             <div class="w-1/3 h-auto mx-auto mt-6 rounded-3xl shadow-lg pb-16" style="background-color: #334155;">
                 <div class="flex flex-col items-center">
-                    <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14" v-model.trim="name" />
-                    <button class="btn w-5/12 mt-4" style="background-color: #111B2E;" @click="startGame()"
-                        @keyup.enter="startGame()">Let's
+                    <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14" v-model.trim="name"
+                        @keyup.enter="startGame()" />
+                    <button class="btn w-5/12 mt-4" style="background-color: #111B2E;" @click="startGame()">Let's
                         Start!</button>
                     <hr class="w-7/12 mt-9" style="border-color: gray;">
                     <label for="how-to-play" class="btn w-5/12 mt-10" style="background-color: #111B2E;">How to
