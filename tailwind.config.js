@@ -8,7 +8,6 @@ module.exports = {
     extend: {},
   },
   plugins: [require("daisyui")],
-  // add all color from colors.json to safelist
   safelist: [
     'bg-red-700',
     'bg-red-800',

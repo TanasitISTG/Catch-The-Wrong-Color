@@ -10,6 +10,7 @@ const counter = ref(60);
 const isGameEnd = ref(false);
 const leaderboard = ref([]);
 let selectedColor = [];
+let prevSelectedColor = {};
 let timer;
 
 const getName = () => {
@@ -29,7 +30,7 @@ const startGame = () => {
     mainMenu.value = false;
     score.value = 0;
     counter.value = 60;
-    getRandomColors();
+    getSelectedColor();
 
     timer = setInterval(() => {
         if (counter.value === 0) {
@@ -80,10 +81,24 @@ const getSizeOfCircles = () => {
     }
 }
 
-const getRandomColors = () => {
-    selectedColor = [];
+const getRandomColor = () => {
     const random = Math.floor(Math.random() * colors.value.length);
-    const color = colors.value[random];
+    return colors.value[random];
+}
+
+const getSelectedColor = () => {
+    selectedColor = [];
+    const color = getRandomColor();
+
+    if (prevSelectedColor.primaryColor === color.primaryColor && prevSelectedColor.secondaryColor === color.secondaryColor) {
+        console.log('same color');
+        console.log('prev color', prevSelectedColor);
+        console.log('current color', color);
+        return getSelectedColor();
+    }
+
+    prevSelectedColor = color;
+
     for (let i = 0; i < getNumberOfCircles(); i++) {
         if (i < getNumberOfCircles() - 1) {
             selectedColor.push(color.primaryColor);
@@ -91,7 +106,7 @@ const getRandomColors = () => {
             selectedColor.push(color.secondaryColor);
         }
     }
-    return selectedColor.sort(() => Math.random() - 0.5)
+    return selectedColor.sort(() => Math.random() - 0.5);
 }
 
 const checkAnswer = (color) => {
@@ -99,7 +114,7 @@ const checkAnswer = (color) => {
 
     if (color === secondaryColor) {
         score.value++;
-        getRandomColors();
+        getSelectedColor();
     }
 }
 
@@ -126,8 +141,6 @@ const saveScore = async () => {
             score: score.value
         })
     });
-    const data = await response.json();
-    leaderboard.value = data;
 }
 
 const convertDate = (date) => {

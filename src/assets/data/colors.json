@@ -1,58 +1,50 @@
 [
-    {
-      "primaryColor": "bg-red-700",
-      "secondaryColor": "bg-red-800"
-    },
-    {
-      "primaryColor": "bg-blue-600",
-      "secondaryColor": "bg-blue-700"
-    },
-    {
-      "primaryColor": "bg-green-400",
-      "secondaryColor": "bg-green-500"
-    },
-    {
-      "primaryColor": "bg-yellow-400",
-      "secondaryColor": "bg-yellow-500"
-    },
-    {
-      "primaryColor": "bg-purple-600",
-      "secondaryColor": "bg-purple-500"
-    },
-    {
-      "primaryColor": "bg-pink-900",
-      "secondaryColor": "bg-rose-900"
-    },
-    {
-      "primaryColor": "bg-indigo-800",
-      "secondaryColor": "bg-indigo-700"
-    },
-    {
-      "primaryColor": "bg-neutral-900",
-      "secondaryColor": "bg-neutral-800"
-    },
-    {
-      "primaryColor": "bg-emerald-200",
-      "secondaryColor": "bg-green-200"
-    },
-    {
-      "primaryColor": "bg-blue-700",
-      "secondaryColor": "bg-blue-800"
-    },
-    {
-      "primaryColor": "bg-teal-800",
-      "secondaryColor": "bg-teal-900"
-    },
-    {
-      "primaryColor": "bg-slate-600",
-      "secondaryColor": "bg-gray-600"
-    },
-    {
-      "primaryColor": "bg-amber-400",
-      "secondaryColor": "bg-yellow-400"
-    },
-    {
-      "primaryColor": "bg-indigo-700",
-      "secondaryColor": "bg-blue-800"
-    }
-  ]
+  {
+    "primaryColor": "bg-red-700",
+    "secondaryColor": "bg-red-800"
+  },
+  {
+    "primaryColor": "bg-green-400",
+    "secondaryColor": "bg-green-500"
+  },
+  {
+    "primaryColor": "bg-purple-600",
+    "secondaryColor": "bg-purple-500"
+  },
+  {
+    "primaryColor": "bg-pink-900",
+    "secondaryColor": "bg-rose-900"
+  },
+  {
+    "primaryColor": "bg-indigo-800",
+    "secondaryColor": "bg-indigo-700"
+  },
+  {
+    "primaryColor": "bg-neutral-900",
+    "secondaryColor": "bg-neutral-800"
+  },
+  {
+    "primaryColor": "bg-emerald-200",
+    "secondaryColor": "bg-green-200"
+  },
+  {
+    "primaryColor": "bg-blue-700",
+    "secondaryColor": "bg-blue-800"
+  },
+  {
+    "primaryColor": "bg-teal-800",
+    "secondaryColor": "bg-teal-900"
+  },
+  {
+    "primaryColor": "bg-slate-600",
+    "secondaryColor": "bg-gray-600"
+  },
+  {
+    "primaryColor": "bg-amber-400",
+    "secondaryColor": "bg-yellow-400"
+  },
+  {
+    "primaryColor": "bg-indigo-700",
+    "secondaryColor": "bg-blue-800"
+  }
+]
