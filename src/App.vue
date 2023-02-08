@@ -147,10 +147,6 @@ const convertDate = (date) => {
     return newDate.toLocaleDateString() + ' ' + newDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-const test = () => {
-    console.log('test');
-}
-
 getLeaderboard();
 </script>
  
