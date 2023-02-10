@@ -69,13 +69,13 @@ const getNumberOfgridColumns = () => {
 
 const getSizeOfCircles = () => {
     if (score.value >= 5 && score.value <= 14) {
-        return 'w-24 h-24';
+        return 'w-24 h-24 max-xl:w-20 max-xl:h-20 max-lg:w-16 max-lg:h-16 max-md:w-14 max-md:h-14 max-sm:w-12 max-sm:h-12';
     } else if (score.value >= 15 && score.value <= 24) {
-        return 'w-20 h-20';
+        return 'w-20 h-20 max-xl:w-16 max-xl:h-16 max-lg:w-14 max-lg:h-14 max-md:w-12 max-md:h-12 max-sm:w-10 max-sm:h-10';
     } else if (score.value >= 25) {
-        return 'w-16 h-16';
+        return 'w-16 h-16 max-xl:w-12 max-xl:h-12 max-lg:w-10 max-lg:h-10 max-md:w-8 max-md:h-8 max-sm:w-6 max-sm:h-6';
     } else {
-        return 'w-32 h-32';
+        return 'w-32 h-32 max-xl:w-24 max-xl:h-24 max-lg:w-20 max-lg:h-20 max-md:w-16 max-md:h-16 max-sm:w-12 max-sm:h-12';
     }
 }
 
