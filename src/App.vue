@@ -153,7 +153,7 @@ getLeaderboard();
 <template>
     <div class="w-screen h-screen" style="background-color: #2A303C;">
         <div class="w-full h-full" v-show="mainMenu">
-            <div class="w-5/12 mx-auto mt-6">
+            <div class="w-5/12 mx-auto">
                 <img src="./assets/images/logo.png" alt="Catch The Wrong Color">
             </div>
 
@@ -172,7 +172,7 @@ getLeaderboard();
 
         <div class="w-full h-full" v-show="!mainMenu">
             <div class="w-full h-1/6">
-                <div class="w-1/12 mt-6 ml-6">
+                <div class="w-1/12 ml-6">
                     <img src="./assets/images/logo.png" alt="Catch The Wrong Color" @click="setMainMenu()">
                 </div>
             </div>
@@ -195,7 +195,7 @@ getLeaderboard();
                             <div class="w-3/6 h-auto rounded-3xl shadow-lg m-auto pb-12"
                                 style="background-color: #334155;">
                                 <div class="w-full h-full flex flex-col">
-                                    <p class="text-center text-5xl font-mono mt-7" style="color: white;">{{ counter }}
+                                    <p class="text-center text-5xl font-mono mt-7 text-white">{{ counter }}
                                     </p>
 
                                     <div class="grid gap-1 m-auto mt-10" :class="getNumberOfgridColumns()">
@@ -219,8 +219,10 @@ getLeaderboard();
                     </div>
 
                     <div class="w-full h-full flex flex-row justify-center gap-5">
-                        <button class="btn mt-6" style="background-color: #AC9C48; color: white;"
-                            @click="setMainMenu()">Main menu</button>
+                        <!-- <button class="btn mt-6" style="background-color: #AC9C48; color: white;"
+                            @click="setMainMenu()">Main menu</button> -->
+                        <label for="main-menu" class="btn mt-6" style="background-color: #AC9C48; color: white;">Main
+                            Menu</label>
                         <label for="leaderboard" class="btn mt-6" style="background-color: #AC9C48; color: white;"
                             @click="getLeaderboard()">LeaderBoard</label>
                         <label for="restart-game" class="btn mt-6"
@@ -245,11 +247,11 @@ getLeaderboard();
     <!-- modal how to play -->
     <input type="checkbox" id="how-to-play" class="modal-toggle" />
     <div class="modal">
-        <div class="modal-box">
+        <div class="modal-box" style="background-color: #2A303C;">
             <h3 class="font-bold text-2xl">How to play?</h3>
-            <p class="py-4">Find the different color, once you find it, click on it.</p>
+            <p class="py-4 ">Find the different color, once you find it, click on it.</p>
             <div class="modal-action mt-0">
-                <label for="how-to-play" class="btn">Yay!</label>
+                <label for="how-to-play" class="btn ">Yay!</label>
             </div>
         </div>
     </div>
@@ -257,12 +259,24 @@ getLeaderboard();
     <!-- modal restart game -->
     <input type="checkbox" id="restart-game" class="modal-toggle" />
     <div class="modal">
-        <div class="modal-box">
-            <h3 class="font-bold text-2xl">Are you sure you want to restart the game</h3>
-            <p class="py-4">Your score will be reset.</p>
+        <div class="modal-box" style="background-color: #2A303C;">
+            <h3 class="font-bold text-2xl ">Are you sure you want to restart the game</h3>
+            <p class="py-4 ">Your score will be reset.</p>
             <div class="modal-action">
                 <label for="restart-game" class="btn">No thanks</label>
-                <label for="restart-game" class="btn btn-error" @click="startGame()">Yay!</label>
+                <label for="restart-game" class="btn" @click="startGame()">Yay!</label>
+            </div>
+        </div>
+    </div>
+
+    <input type="checkbox" id="main-menu" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box" style="background-color: #2A303C;">
+            <h3 class="font-bold text-2xl ">Are you sure you want to redirect to main menu?</h3>
+            <p class="py-4 ">All of your progress will be gone.</p>
+            <div class="modal-action">
+                <label for="main-menu" class="btn">Nooooo</label>
+                <label for="main-menu" class="btn" @click="setMainMenu()">Yay!</label>
             </div>
         </div>
     </div>
@@ -270,9 +284,9 @@ getLeaderboard();
     <!-- modal leaderboard -->
     <input type="checkbox" id="leaderboard" class="modal-toggle" />
     <div class="modal">
-        <div class="modal-box relative w-12/12">
+        <div class="modal-box" style="background-color: #2A303C;">
             <label for="leaderboard" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-            <h3 class="text-2xl font-bold mb-3">Top 10 players</h3>
+            <h3 class="text-2xl font-bold mb-3 ">Top 10 players</h3>
             <div class="flex flex-col">
                 <div class="flex flex-row">
                     <div class="w-1/3">
@@ -313,5 +327,11 @@ input::placeholder {
 
 #firework {
     pointer-events: none;
+}
+
+p,
+h3,
+span {
+    color: white;
 }
 </style>
