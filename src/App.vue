@@ -89,9 +89,6 @@ const getSelectedColor = () => {
     const color = getRandomColor();
 
     if (prevSelectedColor.primaryColor === color.primaryColor && prevSelectedColor.secondaryColor === color.secondaryColor) {
-        console.log('same color');
-        console.log('prev color', prevSelectedColor);
-        console.log('current color', color);
         return getSelectedColor();
     }
 
@@ -181,18 +178,18 @@ getLeaderboard();
                 <div class="w-full h-full flex flex-col">
                     <div class="w-full h-full flex flex-row">
                         <div class="w-1/4 h-1/3 flex flex-col" v-show="!isGameEnd">
-                            <p class="text-lg ml-80">
+                            <p class="text-lg ml-auto">
                                 <span class="font-bold">Player: </span>
                                 {{ getName() }}
                             </p>
-                            <p class="text-lg ml-80">
+                            <p class="text-lg ml-auto">
                                 <span class="font-bold">Score: </span>
                                 {{ score }}
                             </p>
                         </div>
 
                         <div class="w-2/4 h-full" v-show="!isGameEnd">
-                            <div class="w-3/6 h-auto rounded-3xl shadow-lg m-auto pb-12"
+                            <div class="w-2/3 h-auto rounded-3xl shadow-lg m-auto pb-12 px-2"
                                 style="background-color: #334155;">
                                 <div class="w-full h-full flex flex-col">
                                     <p class="text-center text-5xl font-mono mt-7 text-white">{{ counter }}
