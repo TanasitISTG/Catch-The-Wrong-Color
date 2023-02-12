@@ -28,7 +28,7 @@ const startGame = () => {
     isGameEnd.value = false;
     mainMenu.value = false;
     score.value = 0;
-    counter.value = 60;
+    counter.value = 5;
     getSelectedColor();
 
     timerId = setInterval(() => {
@@ -149,96 +149,104 @@ getLeaderboard();
  
 <template>
     <div class="w-screen h-screen" style="background-color: #2A303C;">
-        <div class="w-full h-full" v-show="mainMenu">
-            <div class="w-5/12 mx-auto">
-                <img src="./assets/images/logo.png" alt="Catch The Wrong Color">
-            </div>
+        <Transition>
+            <div class="w-full h-full" v-show="mainMenu">
+                <div class="w-5/12 mx-auto">
+                    <img src="./assets/images/logo.png" alt="Catch The Wrong Color">
+                </div>
 
-            <div class="w-1/3 h-auto mx-auto mt-6 rounded-3xl shadow-lg pb-16" style="background-color: #334155;">
-                <div class="flex flex-col items-center">
-                    <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14" v-model.trim="name"
-                        @keyup.enter="startGame()" />
-                    <button class="btn w-5/12 mt-4" style="background-color: #111B2E;" @click="startGame()">Let's
-                        Start!</button>
-                    <hr class="w-7/12 mt-9" style="border-color: gray;">
-                    <label for="how-to-play" class="btn w-5/12 mt-10" style="background-color: #111B2E;">How to
-                        play</label>
+                <div class="w-1/3 h-auto mx-auto mt-6 rounded-3xl shadow-lg pb-16" style="background-color: #334155;">
+                    <div class="flex flex-col items-center">
+                        <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14"
+                            v-model.trim="name" @keyup.enter="startGame()" />
+                        <button class="btn w-5/12 mt-4" style="background-color: #111B2E;" @click="startGame()">Let's
+                            Start!</button>
+                        <hr class="w-7/12 mt-9" style="border-color: gray;">
+                        <label for="how-to-play" class="btn w-5/12 mt-10" style="background-color: #111B2E;">How to
+                            play</label>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Transition>
 
-        <div class="w-full h-full" v-show="!mainMenu">
-            <div class="w-full h-1/6">
-                <div class="w-1/12 ml-6">
-                    <img src="./assets/images/logo.png" alt="Catch The Wrong Color" @click="setMainMenu()">
+        <Transition>
+            <div class="w-full h-full" v-show="!mainMenu">
+                <div class="w-full h-1/6">
+                    <div class="w-1/12 ml-6">
+                        <img src="./assets/images/logo.png" alt="Catch The Wrong Color" @click="setMainMenu()">
+                    </div>
                 </div>
-            </div>
 
-            <div class="w-full h-full">
-                <div class="w-full h-full flex flex-col">
-                    <div class="w-full h-full flex flex-row">
-                        <div class="w-1/4 h-1/3 flex flex-col" v-show="!isGameEnd">
-                            <p class="text-lg ml-auto">
-                                <span class="font-bold">Player: </span>
-                                {{ getName() }}
-                            </p>
-                            <p class="text-lg ml-auto">
-                                <span class="font-bold">Score: </span>
-                                {{ score }}
-                            </p>
-                        </div>
+                <div class="w-full h-full">
+                    <div class="w-full h-full flex flex-col">
+                        <div class="w-full h-full flex flex-row">
+                            <div class="w-1/4 h-1/3 flex flex-col" v-show="!isGameEnd">
+                                <p class="text-lg ml-auto">
+                                    <span class="font-bold">Player: </span>
+                                    {{ getName() }}
+                                </p>
+                                <p class="text-lg ml-auto">
+                                    <span class="font-bold">Score: </span>
+                                    {{ score }}
+                                </p>
+                            </div>
 
-                        <div class="w-2/4 h-full" v-show="!isGameEnd">
-                            <div class="w-2/3 h-auto rounded-3xl shadow-lg m-auto pb-12 px-2"
-                                style="background-color: #334155;">
-                                <div class="w-full h-full flex flex-col">
-                                    <p class="text-center text-5xl font-mono mt-7 text-white">{{ counter }}
-                                    </p>
+                            <div class="w-2/4 h-full" v-show="!isGameEnd">
+                                <div class="w-2/3 h-auto rounded-3xl shadow-lg m-auto pb-12 px-2"
+                                    style="background-color: #334155;">
+                                    <div class="w-full h-full flex flex-col">
+                                        <p class="text-center text-5xl font-mono mt-7 text-white">{{ counter }}
+                                        </p>
 
-                                    <div class="grid gap-1 m-auto mt-10" :class="getNumberOfgridColumns()">
-                                        <div class="rounded-full" v-for="(color, index) in selectedColor" :key="index"
-                                            :class="`${color} ${getSizeOfCircles()}`" @click="checkAnswer(color)"></div>
+                                        <div class="grid gap-1 m-auto mt-10" :class="getNumberOfgridColumns()">
+                                            <div class="rounded-full" v-for="(color, index) in selectedColor"
+                                                :key="index" :class="`${color} ${getSizeOfCircles()}`"
+                                                @click="checkAnswer(color)"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="w-full h-full" v-show="isGameEnd">
-                            <div class="w-1/4 h-full rounded-3xl shadow-lg mx-auto" style="background-color: #334155;">
-                                <div class="w-full h-full flex flex-col">
-                                    <p class="text-center text-4xl font-mono mt-32" style="color: #FFDA1B;">
-                                        Congratulations!</p>
-                                    <p class="text-center text-3xl font-mono mt-7">{{ getName() }}</p>
-                                    <p class="text-center text-3xl font-mono mt-7">{{ score }} point!!</p>
+                            <Transition>
+                                <div class="w-full h-full" v-show="isGameEnd">
+                                    <div class="w-1/4 h-full rounded-3xl shadow-lg mx-auto"
+                                        style="background-color: #334155;">
+                                        <div class="w-full h-full flex flex-col">
+                                            <p class="text-center text-4xl font-mono mt-32" style="color: #FFDA1B;">
+                                                Congratulations!</p>
+                                            <p class="text-center text-3xl font-mono mt-7">{{ getName() }}</p>
+                                            <p class="text-center text-3xl font-mono mt-7">{{ score }} point!!</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </Transition>
                         </div>
-                    </div>
 
-                    <div class="w-full h-full flex flex-row justify-center gap-5">
-                        <!-- <button class="btn mt-6" style="background-color: #AC9C48; color: white;"
-                            @click="setMainMenu()">Main menu</button> -->
-                        <label for="main-menu" class="btn mt-6" style="background-color: #AC9C48; color: white;">Main
-                            Menu</label>
-                        <label for="leaderboard" class="btn mt-6" style="background-color: #AC9C48; color: white;"
-                            @click="getLeaderboard()">LeaderBoard</label>
-                        <label for="restart-game" class="btn mt-6"
-                            style="background-color: #AC9C48; color: white;">Restart Game</label>
+                        <div class="w-full h-full flex flex-row justify-center gap-5">
+                            <label for="main-menu" class="btn mt-6"
+                                style="background-color: #AC9C48; color: white;">Main
+                                Menu</label>
+                            <label for="leaderboard" class="btn mt-6" style="background-color: #AC9C48; color: white;"
+                                @click="getLeaderboard()">LeaderBoard</label>
+                            <label for="restart-game" class="btn mt-6"
+                                style="background-color: #AC9C48; color: white;">Restart Game</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="firework" class="w-full h-full" v-show="isGameEnd">
-                <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 left-0">
-                <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 right-0">
-                <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 left-0">
-                <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 right-0">
-                <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 left-1/4">
-                <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 right-1/4">
-                <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 left-1/4">
-                <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 right-1/4">
+
+                <div id="firework" class="w-full h-full" v-show="isGameEnd">
+                    <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 left-0">
+                    <img src="./assets/images/firework.gif" alt="firework" class="absolute top-0 right-0">
+                    <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 left-0">
+                    <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-0 right-0">
+                    <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 left-1/4">
+                    <img src="./assets/images/firework.gif" alt="firework" class="absolute top-1/4 right-1/4">
+                    <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 left-1/4">
+                    <img src="./assets/images/firework.gif" alt="firework" class="absolute bottom-1/4 right-1/4">
+                </div>
             </div>
-        </div>
+        </Transition>
     </div>
 
     <!-- modal how to play -->
@@ -330,5 +338,13 @@ p,
 h3,
 span {
     color: white;
+}
+
+.v-enter-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from {
+    opacity: 0;
 }
 </style>
