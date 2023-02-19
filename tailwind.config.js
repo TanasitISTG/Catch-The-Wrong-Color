@@ -1,32 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./src/assets/data/colors.json",
+  ],
   theme: {
     extend: {},
   },
   plugins: [require("daisyui")],
-  safelist: [
-    "bg-red-700",
-    "bg-red-800",
-    "bg-blue-700",
-    "bg-green-400",
-    "bg-green-500",
-    "bg-yellow-400",
-    "bg-purple-600",
-    "bg-purple-500",
-    "bg-pink-900",
-    "bg-rose-900",
-    "bg-indigo-800",
-    "bg-indigo-700",
-    "bg-neutral-900",
-    "bg-neutral-800",
-    "bg-emerald-200",
-    "bg-green-200",
-    "bg-blue-800",
-    "bg-teal-800",
-    "bg-teal-900",
-    "bg-slate-600",
-    "bg-gray-600",
-    "bg-amber-400",
-  ],
 };
