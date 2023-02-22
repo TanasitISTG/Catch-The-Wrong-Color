@@ -12,6 +12,10 @@ let selectedColor = ref([]);
 let prevSelectedColor = {};
 let timerId;
 
+const getCounter = () => {
+    return `--value:${counter.value};`;
+}
+
 const getName = () => {
     if (name.value === '' || name.value.length === 0) {
         return 'Guest';
@@ -157,8 +161,8 @@ getLeaderboard();
 
                 <div class="w-1/3 h-auto mx-auto mt-6 rounded-3xl shadow-lg pb-16" style="background-color: #334155;">
                     <div class="flex flex-col items-center">
-                        <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14"
-                            v-model.trim="name" @keyup.enter="startGame()" />
+                        <input type="text" placeholder="Type your name..." class="input w-5/12 mt-14" v-model.trim="name"
+                            @keyup.enter="startGame()" />
                         <button class="btn w-5/12 mt-4" style="background-color: #111B2E;" @click="startGame()">Let's
                             Start!</button>
                         <hr class="w-7/12 mt-9" style="border-color: gray;">
@@ -195,13 +199,13 @@ getLeaderboard();
                                 <div class="w-2/3 h-auto rounded-3xl shadow-lg m-auto pb-12 px-2"
                                     style="background-color: #334155;">
                                     <div class="w-full h-full flex flex-col">
-                                        <p class="text-center text-5xl font-mono mt-7 text-white">{{ counter }}
-                                        </p>
+                                        <span class="countdown font-mono text-6xl justify-center p-5">
+                                            <span :style="getCounter()"></span>
+                                        </span>
 
                                         <div class="grid gap-1 m-auto mt-10" :class="getNumberOfgridColumns()">
-                                            <div class="rounded-full" v-for="(color, index) in selectedColor"
-                                                :key="index" :class="`${color} ${getSizeOfCircles()}`"
-                                                @click="checkAnswer(color)"></div>
+                                            <div class="rounded-full" v-for="(color, index) in selectedColor" :key="index"
+                                                :class="`${color} ${getSizeOfCircles()}`" @click="checkAnswer(color)"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -223,8 +227,7 @@ getLeaderboard();
                         </div>
 
                         <div class="w-full h-full flex flex-row justify-center gap-5">
-                            <label for="main-menu" class="btn mt-6"
-                                style="background-color: #AC9C48; color: white;">Main
+                            <label for="main-menu" class="btn mt-6" style="background-color: #AC9C48; color: white;">Main
                                 Menu</label>
                             <label for="leaderboard" class="btn mt-6" style="background-color: #AC9C48; color: white;"
                                 @click="getLeaderboard()">LeaderBoard</label>
@@ -274,6 +277,7 @@ getLeaderboard();
         </div>
     </div>
 
+    <!-- modal main menu -->
     <input type="checkbox" id="main-menu" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box" style="background-color: #2A303C;">
