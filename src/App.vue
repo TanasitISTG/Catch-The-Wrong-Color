@@ -9,7 +9,7 @@ const counter = ref(60);
 const isGameEnd = ref(false);
 const leaderboard = ref([]);
 let selectedColor = ref([]);
-let prevSelectedColor = {};
+let prevColor = {};
 let timerId;
 
 const getCounter = () => {
@@ -92,11 +92,11 @@ const getSelectedColor = () => {
     selectedColor = [];
     const color = getRandomColor();
 
-    if (prevSelectedColor.primaryColor === color.primaryColor && prevSelectedColor.secondaryColor === color.secondaryColor) {
+    if (prevColor.primaryColor === color.primaryColor && prevColor.secondaryColor === color.secondaryColor) {
         return getSelectedColor();
     }
 
-    prevSelectedColor = color;
+    prevColor = color;
 
     for (let i = 0; i < getNumberOfCircles(); i++) {
         if (i < getNumberOfCircles() - 1) {
