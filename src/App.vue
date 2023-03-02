@@ -106,7 +106,15 @@ const getSelectedColor = () => {
         }
     }
 
-    return selectedColor.sort(() => Math.random() - 0.5);
+    // return selectedColor.sort(() => Math.random() - 0.5);
+    return shuffleArray(selectedColor);
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
 const checkAnswer = (color) => {
@@ -125,13 +133,13 @@ const setMainMenu = () => {
 }
 
 async function getLeaderboard() {
-    const response = await fetch('https://test-project-api-production.up.railway.app/leaderboard');
+    const response = await fetch('https://test-project-api.up.railway.app/leaderboard');
     const data = await response.json();
     leaderboard.value = data;
 }
 
 const saveScore = async () => {
-    await fetch('https://test-project-api-production.up.railway.app/leaderboard', {
+    await fetch('https://test-project-api.up.railway.app/leaderboard', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
